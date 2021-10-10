@@ -31,7 +31,7 @@ int main()
     block.y = 4;
     grid.x  = ceil( (float)dimx / block.x );
     grid.y  = ceil( (float)dimy / block.y );
-    const char somestr[9] = " kernel ";
+    char *somestr = (char *)malloc(9*sizeof(char));
     
     // Use kernel to fill d_a array
     kernel<<<grid, block>>>( d_a, dimx, dimy );
@@ -42,45 +42,47 @@ int main()
     cudaMemset( d_a, 0, num_bytes );
     kernel2<<<grid, block>>>( d_a, dimx, dimy );
     cudaMemcpy( h_a, d_a, num_bytes, cudaMemcpyDeviceToHost );
-    somestr = "kernel 2";
-    printArr(h_a, "kernel 2", dimy, dimx);
+    strcpy(somestr, "kernel 2");
+    printArr(h_a, somestr, dimy, dimx);
 
     // Use kernel3 to fill d_a array
     cudaMemset( d_a, 0, num_bytes );
     kernel3<<<grid, block>>>( d_a, dimx, dimy );
     cudaMemcpy( h_a, d_a, num_bytes, cudaMemcpyDeviceToHost );
-    somestr = "kernel 3";
-    printArr(h_a, "kernel 3", dimy, dimx);
+    strcpy(somestr, "kernel 3");
+    printArr(h_a, somestr, dimy, dimx);
 
     // Use kernel4 to fill d_a array
     cudaMemset( d_a, 0, num_bytes );
     kernel4<<<grid, block>>>( d_a, dimx, dimy );
     cudaMemcpy( h_a, d_a, num_bytes, cudaMemcpyDeviceToHost );
-    somestr = "kernel 4";
-    printArr(h_a, "kernel 4", dimy, dimx);
+    strcpy(somestr, "kernel 4");
+    printArr(h_a, somestr, dimy, dimx);
    
     // Use kernel5 to fill d_a array
     cudaMemset( d_a, 0, num_bytes );
     kernel5<<<grid, block>>>( d_a, dimx, dimy );
     cudaMemcpy( h_a, d_a, num_bytes, cudaMemcpyDeviceToHost );
-    somestr = "kernel 5";
-    printArr(h_a, "kernel 5", dimy, dimx);
+    strcpy(somestr, "kernel 5");
+    printArr(h_a, somestr, dimy, dimx);
    
     // Use kernel6 to fill d_a array
     cudaMemset( d_a, 0, num_bytes );
     kernel6<<<grid, block>>>( d_a, dimx, dimy );
     cudaMemcpy( h_a, d_a, num_bytes, cudaMemcpyDeviceToHost );
-    somestr = "kernel 6";
-    printArr(h_a, "kernel 6", dimy, dimx);
+    strcpy(somestr, "kernel 6");
+    printArr(h_a, somestr, dimy, dimx);
 
     free( h_a );
     cudaFree( d_a );
+
+    free(somestr);
 
     return 0;
 }
 
 // print array 
-void printArr(int *a, const char *name, int dimy, int dimx)
+void printArr(int *a, char *name, int dimy, int dimx)
 {
     if(name == NULL)
         return;
