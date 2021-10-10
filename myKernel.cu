@@ -17,6 +17,11 @@ __global__ void kernel2( int *a, int dimx, int dimy )
 
 __global__ void kernel3( int *a, int dimx, int dimy )
 {
+    int ix   = blockIdx.x*blockDim.x + threadIdx.x;
+    int iy   = blockIdx.y*blockDim.y + threadIdx.y;
+    int idx = iy*dimx + ix;
+
+    a[idx] = idx;
 }
 
 __global__ void kernel4( int *a, int dimx, int dimy )
@@ -33,7 +38,7 @@ __global__ void kernel6( int *a, int dimx, int dimy )
     int iy   = blockIdx.y*blockDim.y + threadIdx.y;
     int idx = iy*dimx + ix;
 
-    a[idx] = idx;
+    a[idx] = ix;
 }
 
 
