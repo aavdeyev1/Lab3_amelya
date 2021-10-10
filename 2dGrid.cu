@@ -33,9 +33,11 @@ int main()
     grid.y  = ceil( (float)dimy / block.y );
     char *somestr = (char *)malloc(9*sizeof(char));
     
+    
     // Use kernel to fill d_a array
     kernel<<<grid, block>>>( d_a, dimx, dimy );
     cudaMemcpy( h_a, d_a, num_bytes, cudaMemcpyDeviceToHost );
+    strcpy(somestr, " kernel ");
     printArr(h_a, somestr, dimy, dimx);
 
     // Use kernel2 to fill d_a array
