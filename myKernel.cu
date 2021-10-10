@@ -29,7 +29,8 @@ __global__ void kernel4( int *a, int dimx, int dimy )
     int ix   = blockIdx.x*blockDim.x + threadIdx.x;
     int iy   = blockIdx.y*blockDim.y + threadIdx.y;
     int idx = iy*dimx + ix;
-    a[idx] = ix;
+    if (ix < 16)
+        a[idx] = ix;
 }
 
 __global__ void kernel5( int *a, int dimx, int dimy )
