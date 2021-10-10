@@ -5,8 +5,8 @@ __global__ void kernel( int *a, int dimx, int dimy )
     int ix   = blockIdx.x*blockDim.x + threadIdx.x;
     int iy   = blockIdx.y*blockDim.y + threadIdx.y;
     int idx = iy*dimx + ix;
-
-    a[idx]  = a[idx]+1;
+    if (ix < 16)
+        a[idx] = blockIdx.y;
 }
 
 // Please implement the following kernels2 through kernel6,
@@ -29,8 +29,8 @@ __global__ void kernel4( int *a, int dimx, int dimy )
     int ix   = blockIdx.x*blockDim.x + threadIdx.x;
     int iy   = blockIdx.y*blockDim.y + threadIdx.y;
     int idx = iy*dimx + ix;
-
-    a[idx] = threadIdx.y;
+    if (ix < 16)
+        a[idx] = blockIdx.x + blockIdx.y;
     
 }
 
