@@ -48,11 +48,6 @@ __global__ void kernel6( int *a, int dimx, int dimy )
     int ix   = blockIdx.x*blockDim.x + threadIdx.x;
     int iy   = blockIdx.y*blockDim.y + threadIdx.y;
     int idx = iy*dimx + ix;
-
-    a[idx] = threadIdx.y;
-    int ix   = blockIdx.x*blockDim.x + threadIdx.x;
-    int iy   = blockIdx.y*blockDim.y + threadIdx.y;
-    int idx = iy*dimx + ix;
     if (ix < 16)
         a[idx] = blockIdx.x;
 }
