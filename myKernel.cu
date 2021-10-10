@@ -37,7 +37,7 @@ __global__ void kernel5( int *a, int dimx, int dimy )
     int ix   = blockIdx.x*blockDim.x + threadIdx.x;
     int iy   = blockIdx.y*blockDim.y + threadIdx.y;
     int idx = iy*dimx + ix;
-    if (iy < 16)
+    if (ix < 15)
         a[idx] = blockDim.y;
 }
 
