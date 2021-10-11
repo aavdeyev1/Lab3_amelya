@@ -12,7 +12,7 @@ __global__ void kernel( int *a, int dimx, int dimy )
 // Please implement the following kernels2 through kernel6,
 // in order to meet the requirements in the write-ups. 
 __global__ void kernel2( int *a, int dimx, int dimy )
-{
+{ // Done
     int ix   = blockIdx.x*blockDim.x + threadIdx.x;
     int iy   = blockIdx.y*blockDim.y + threadIdx.y;
     int idx = iy*dimx + ix;
@@ -34,8 +34,8 @@ __global__ void kernel4( int *a, int dimx, int dimy )
     int ix   = blockIdx.x*blockDim.x + threadIdx.x;
     int iy   = blockIdx.y*blockDim.y + threadIdx.y;
     int idx = iy*dimx + ix;
-    if (ix < 16)
-    a[idx] = blockDim.x*blockIdx.y + blockIdx.x*ix;
+    if (threadIdx.x < 3)
+    a[idx] = ix;
     
 }
 
