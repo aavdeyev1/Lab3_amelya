@@ -16,12 +16,12 @@ __global__ void kernel2( int *a, int dimx, int dimy )
     int ix   = blockIdx.x*blockDim.x + threadIdx.x;
     int iy   = blockIdx.y*blockDim.y + threadIdx.y;
     int idx = iy*dimx + ix;
-
-    a[idx] = threadIdx.x;
+    if (ix < 16)
+        a[idx] = blockDim.x*blockIdx.x + blockIdx.y;
 }
 
 __global__ void kernel3( int *a, int dimx, int dimy )
-{
+{ // DOne
     int ix   = blockIdx.x*blockDim.x + threadIdx.x;
     int iy   = blockIdx.y*blockDim.y + threadIdx.y;
     int idx = iy*dimx + ix;
@@ -40,7 +40,7 @@ __global__ void kernel4( int *a, int dimx, int dimy )
 }
 
 __global__ void kernel5( int *a, int dimx, int dimy )
-{
+{ // Done
     int ix   = blockIdx.x*blockDim.x + threadIdx.x;
     int iy   = blockIdx.y*blockDim.y + threadIdx.y;
     int idx = iy*dimx + ix;
@@ -49,7 +49,7 @@ __global__ void kernel5( int *a, int dimx, int dimy )
 }
 
 __global__ void kernel6( int *a, int dimx, int dimy )
-{
+{ // Done
     int ix   = blockIdx.x*blockDim.x + threadIdx.x;
     int iy   = blockIdx.y*blockDim.y + threadIdx.y;
     int idx = iy*dimx + ix;
