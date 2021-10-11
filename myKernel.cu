@@ -17,7 +17,7 @@ __global__ void kernel2( int *a, int dimx, int dimy )
     int iy   = blockIdx.y*blockDim.y + threadIdx.y;
     int idx = iy*dimx + ix;
     if (ix < 16)
-        a[idx] = (dimy / 2) * blockIdx.y * blockDim.x + blockIdx.x;
+        a[idx] = gridDim.x * blockIdx.y + blockIdx.x;
 }
 
 __global__ void kernel3( int *a, int dimx, int dimy )
